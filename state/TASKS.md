@@ -7,7 +7,7 @@
 - 关键实测数字（`bench/result.json`，node v24.19.0，最终以重跑后的 result.json 为准）：
   - 6,912 三角半镜面 UV 球：**3,456 mirrored / 3,456 right-handed / 0 degenerate**（三分划分完整）
   - 作者帧（`tangent.w = +1`）在镜像三角上的着色误差：**均值 45.290306°、最大采样 73.739795°**；右手三角 **精确 0**；证书帧（`w = UV 手性`）**worst sampled 0.000e+0°**（用 `atan2` 而非 `acos`，避免近 1 处的 1e-6 假噪声）
-  - 扫描证书 vs O(V·F) 基线 **≈148×**（本轮第二轮 bench 加了每样本 20 次批计时来压 JIT/GC 噪声，最终数字见仓库 result.json）
+  - 扫描证书 vs O(V·F) 基线 **290.60×**（median 1.2179 ms vs 353.9262 ms，p95-vs-p95 204×）；两侧**同样**按每样本 8 次连跑取均值（`coreBatch=naiveBatch=8`），不是只给 core 批计时
   - **尺度不变**：3D 1e-6…1e6、UV 1e-3…1e3，26 个对比字段 **0 漂移（位级相同）**；`epsRel = 1e-12 × maxAbsUvArea` 是**唯一阈值且相对**，`maxAbsArea` 随 k² 精确缩放
   - 独立 oracle：朴素分类器 3/3 语料逐项一致；几何 bitangent oracle 在 **9,800 个可判三角上 0 分歧**；136 个球极点零 3D 面积扇形三角**从几何上不可判**，单列并写入 README 限制
   - `degen-sphere`：48 个零 UV 面积三角全部检出，且 **0 个被误算成 mirrored**
