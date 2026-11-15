@@ -1,0 +1,1 @@
+2026-11-15 | three-d | llinok111/tangentflip-cert-lab | 逐三角 UV 手性证书 + normal-map 着色误差可复算角度：mirror-sphere 3456/6912 镜像，w=+1 作者帧误差 45.290306° 均值/73.739795° 峰值，证书帧精确 0；148.59x vs O(V*F) 基线；尺度 1e-6..1e6 位级不变 | B | 已发布
