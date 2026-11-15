@@ -110,7 +110,6 @@ export function accumulateTangents(mesh) {
     const l = Math.hypot(t[0], t[1], t[2]);
     out[v * 4] = t[0] / l; out[v * 4 + 1] = t[1] / l; out[v * 4 + 2] = t[2] / l;
     out[v * 4 + 3] = 1; // naive authoring: uniform handedness assumed
-    void bit;
   }
   return out;
 }
@@ -239,16 +238,12 @@ export function oracleSigns(mesh, opts = {}) {
     const det = du1 * dv2 - du2 * dv1;
     if (det === 0) { signs[t] = 0; continue; }
     const nhat = [n[0] / nl, n[1] / nl, n[2] / nl];
-    const Tf = [(du1 * e2[0] - du2 * e1[0]) / det, (du1 * e2[1] - du2 * e1[1]) / det, (du1 * e2[2] - du2 * e1[2]) / det];
-    void Tf;
-    // bitangent direction reconstructed from the same UV rows by a different algebra
-    const Bv = [(du1 * e2[0] - du2 * e1[0]) / det, (du1 * e2[1] - du2 * e1[1]) / det, (du1 * e2[2] - du2 * e1[2]) / det];
-    // cross(N, T) with T = (dv2 e1 - dv1 e2)/det
+    // T and B reconstructed from the two UV rows by a different algebra than
+    // classifyHandedness: T = (dv2 e1 - dv1 e2)/det, B = (du1 e2 - du2 e1)/det
     const Tx = [(dv2 * e1[0] - dv1 * e2[0]) / det, (dv2 * e1[1] - dv1 * e2[1]) / det, (dv2 * e1[2] - dv1 * e2[2]) / det];
     const cN_T = [nhat[1] * Tx[2] - nhat[2] * Tx[1], nhat[2] * Tx[0] - nhat[0] * Tx[2], nhat[0] * Tx[1] - nhat[1] * Tx[0]];
     // B is exactly the du-row combination: B = (du1 e2 - du2 e1)/det
     const be = [(du1 * e2[0] - du2 * e1[0]) / det, (du1 * e2[1] - du2 * e1[1]) / det, (du1 * e2[2] - du2 * e1[2]) / det];
-    void Bv;
     const dot = cN_T[0] * be[0] + cN_T[1] * be[1] + cN_T[2] * be[2];
     const scale = Math.hypot(cN_T[0], cN_T[1], cN_T[2]) * Math.hypot(be[0], be[1], be[2]);
     if (scale === 0 || Math.abs(dot) <= tolRel * scale) { signs[t] = 0; continue; }

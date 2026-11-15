@@ -11,8 +11,9 @@ function uvSphere({ rings, segs, mirrorHalf = false, collapseLon = -1, radius = 
       positions.push(radius * Math.sin(theta) * Math.cos(phi), radius * Math.cos(theta), radius * Math.sin(theta) * Math.sin(phi));
       let u = il / segs;
       if (mirrorHalf && il >= segs / 2) u = 1 - il / segs;
-      if (il === collapseLon) { u = 0.25; uvs.push(u, 0.25); continue; } // whole column -> one UV point
-      uvs.push(u, iy / rings);
+      // the whole collapsed column maps to a single UV point -> zero UV area
+      if (il === collapseLon) uvs.push(0.25, 0.25);
+      else uvs.push(u, iy / rings);
     }
   }
   const row = segs + 1;
