@@ -55,6 +55,8 @@ For triangle `(a,b,c)` with UVs `(u,v)`, let `A = (u_b-u_a)(v_c-v_a) - (u_c-u_a)
 4. **Timing is ~1.2179 ms of work**, so `relStddev = 21.53%` on the core scan is JIT/GC noise around a 1-ms measurement (absolute stddev 0.2809 ms, p95 2.3295 ms, cold 18.0621 ms includes warm-up). It is reported as measured and is not used to claim anything except the 290.6× ratio, which survives every summary statistic. Both sides are timed with the **same** batch of 8 consecutive calls, so neither side is favoured.
 5. The threshold is relative to the **largest** `|UV area|` in the mesh, so a single huge UV triangle sets the floor for the whole mesh; valid, degenerate-classification depends on it.
 6. Only per-triangle winding is analysed — no texture-space or per-texel analysis, no UV overlap (that is `uv-audit-lab`'s job, deliberately not repeated here).
+7. The certificate is **per triangle**; the browser demo has to turn it into one number per **vertex** (`tangent.w`), which it does by majority sign over the incident triangles. Across a seam where a mirrored island meets a right-handed one, a shared vertex can therefore only honour one side. Splitting UV seams (or the exact per-vertex rule) is a follow-up, not a claim made here.
+8. The demo page is validated as far as a headless box allows: pinned importmap, syntax-checked `main.js`, statically reviewed render path, and `core.mjs` shared verbatim with node. No screenshot or browser-automation evidence is used anywhere in this repository (G8), so a visual regression would not be caught automatically.
 
 ## Quality gates
 
