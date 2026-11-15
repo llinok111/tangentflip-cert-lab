@@ -14,6 +14,7 @@
 - 质量闸门：G1–G9 全过（G5 的 relStddev 在 README 里如实解释为 ~2.3 ms 量级的 JIT/GC 噪声，并给出绝对 stddev/p95/cold）
 - 创新：**B**。发布前起只读调研子 agent，结果指出**原定选题（蒙皮动画连续时间自交证书 + 最小姿态修复）已被同账号当日 04:29 发布的 `llinok111/skinint-cert-lab` 覆盖 → C 档**，于是当场换题到「逐三角 UV 手性 + normal-map 着色误差」这条台账零先例的轴（`winding-cert`/`pointnorm-cert` 只做顶点朝向，`uv-audit` 只做 UV 重叠/畸变）。README `## 本轮创新` 已逐条对比。
 - 上游回馈评估：**原创主题，无对应上游仓库可修** → 按契约交 **0 个**提案（不生成 `state/upstream-pr.json`）。
+- Lead 自做的独立复算（不 import core，/tmp 里另写脚本）：mirror-sphere 有向 UV 面积 pos=3456 / neg=3456 / zero=0，maxA=2.893518518518536e-4，最小非零 |A|=2.893518518518498e-4 ≫ eps=2.8935e-16（即 48 个 degenerate 的确只是精确 0）；全量 64 采样角扫描独立复现 **authored worst 73.739795° / certified worst 0.000000°**，可判三角中 mirrored=3420（+36 个 nl=0 的极点扇形 = 3456），与 README 的 136 个不可判三角一致。
 - 独立 verifier：只读子 agent 已在 /tmp 干净克隆复核（重跑 verify/bench、自写脚本复算 UV 符号、反证「证书帧精确 0」、复核三个前作的 README 是否真不撞车、卫生检查）。
 - **未完成 / 下一步（按续接优先级）**：
   1. 球极点 136 个零 3D 面积扇形三角不可判 —— 若要做强，可加「按 UV 邻接环判断整体手性」的补丁，把不可判集合压到 0（需新证据）。
