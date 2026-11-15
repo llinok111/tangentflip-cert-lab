@@ -1,0 +1,58 @@
+{
+  "node": "v24.19.0",
+  "mesh": {
+    "name": "mirror-sphere",
+    "triangles": 6912,
+    "vertices": 3577
+  },
+  "scanCertificate": {
+    "core": {
+      "min": 1.976,
+      "median": 2.3427,
+      "p95": 3.7391,
+      "max": 3.7391,
+      "stddev": 0.649,
+      "relStddev": 0.2345,
+      "samples": 7
+    },
+    "coldMs": 18.6523,
+    "naive": {
+      "min": 324.9596,
+      "median": 348.1047,
+      "p95": 355.2202,
+      "max": 355.2202,
+      "stddev": 12.4881,
+      "relStddev": 0.0365,
+      "samples": 5
+    },
+    "naiveColdMs": 351.9267,
+    "speedupMedian": 148.59
+  },
+  "fullCertificate": {
+    "stats": {
+      "min": 61.4929,
+      "median": 64.6157,
+      "p95": 79.3016,
+      "max": 79.3016,
+      "stddev": 6.4817,
+      "relStddev": 0.097,
+      "samples": 5
+    },
+    "coldMs": 84.2043
+  },
+  "correctness": {
+    "triangles": 6912,
+    "mirrored": 3456,
+    "rightHanded": 3456,
+    "degenerateUv": 0,
+    "authoredMeanMirroredDeg": 45.290306,
+    "authoredMaxMirroredDeg": 45.767046,
+    "authoredWorstSampleMirroredDeg": 73.739795,
+    "correctedWorstSampleAllDeg": 0,
+    "authoredMaxRightDeg": 0,
+    "correctedMaxAllDeg": 0,
+    "epsRel": 1e-12,
+    "maxAbsArea": 0.0002893518518518536,
+    "samplesPerTriangle": 64
+  }
+}

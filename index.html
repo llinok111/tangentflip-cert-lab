@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>tangentflip-cert-lab — UV handedness certificate</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#e6edf3;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+  #app{display:flex;height:100%}
+  #view{flex:1;min-width:0}
+  #side{width:340px;padding:12px;overflow:auto;border-left:1px solid #30363d;background:#161b22}
+  h1{font-size:14px;margin:0 0 8px}
+  button{display:block;width:100%;margin:4px 0;padding:6px;background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:6px;cursor:pointer}
+  button.on{border-color:#3fb950;color:#3fb950}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  td{padding:2px 0;vertical-align:top}
+  td:last-child{text-align:right;color:#7ee787}
+  .note{color:#8b949e;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="view"></div>
+  <div id="side">
+    <h1>tangentflip-cert-lab</h1>
+    <div class="note">Same <code>src/core.mjs</code> runs here and in <code>node bench/verify.mjs</code>. Every number below is computed live in this page.</div>
+    <div id="mesh"><button data-mesh="mirror-sphere" class="on">mirror-sphere (half mirrored UVs)</button><button data-mesh="clean-sphere">clean-sphere</button><button data-mesh="degen-sphere">degen-sphere</button></div>
+    <div id="frame"><button data-frame="authored" class="on">framing: as authored (w = +1)</button><button data-frame="certified">framing: certified (w = UV handedness)</button></div>
+    <table id="out"></table>
+    <div class="note">
+      Mirrored triangles are tinted red; right-handed green; zero-UV-area grey.
+      Toggle <em>framing</em> and watch the normal-mapped relief invert on red triangles.
+    </div>
+  </div>
+</div>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}
+</script>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
